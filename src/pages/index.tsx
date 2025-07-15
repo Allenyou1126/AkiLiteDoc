@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -19,12 +18,12 @@ function HomepageHeader() {
 				<div className={styles.buttons}>
 					<Link
 						className="button button--secondary button--lg"
-						to="/docs/intro">
+						to="/docs/document/intro">
 						使用文档
 					</Link>
 					<Link
 						className="button button--secondary button--lg"
-						to="/docs/intro">
+						to="/docs/develop/intro">
 						开发文档
 					</Link>
 				</div>
@@ -33,7 +32,7 @@ function HomepageHeader() {
 	);
 }
 
-export default function Home(): ReactNode {
+export default function Home(): React.ReactNode {
 	const { siteConfig } = useDocusaurusContext();
 	return (
 		<Layout
