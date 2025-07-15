@@ -8,13 +8,11 @@ on:
 
 jobs:
   build:
-    name: Build & Deploy
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [22.x]
-    environment:
-      name: SSH
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -32,6 +30,23 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: docs-build
+          path: "build"
+  deploy:
+    name: Deploy
+    environment:
+      name: SSH
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: docs-build
+          path: "build"
       - name: Deploy to Server
         uses: saranraj3195/sparkout-deployment@v2
         env:
